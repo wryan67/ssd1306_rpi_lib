@@ -4,6 +4,7 @@ Demo for ssd1306 i2c driver for  Raspberry Pi
 
 #include "../src/ssd1306_i2c.h"
 #include <stdio.h>
+#include <math.h>
 #include <wiringPi.h>
 
 
@@ -55,19 +56,56 @@ int main() {
         ssd1306_drawPixel(127, i, WHITE);
     }
 
-    ssd1306_fillRect(85, 2, 8, 13, WHITE);
-
+    
     ssd1306_moveCursor(2, 5);
 
     ssd1306_drawString("Hello World!!!");
 
+    ssd1306_fillRect(85, 2, 8, 13, WHITE);
+
+    ssd1306_drawCircle(110, 16, 15, WHITE);
+
+// clock
+    for (double d = 0; d < 360; d += 360/12) {
+        int x2, y2;
+
+        ssd1306_arcPoint(110, 16, 12, d, &x2, &y2);
+
+        ssd1306_drawLine(110, 16, x2, y2, WHITE);
+    }
+
+
+// base lines
+    ssd1306_drawLine(15, 29, 30, 29, WHITE);
+    ssd1306_drawLine(15, 30, 30, 30, WHITE);
+
+// hash marks    
+    ssd1306_drawLine(20, 18, 20, 25, WHITE);
+    ssd1306_drawLine(25, 18, 25, 25, WHITE);
+
+
+// test endpoint lines
+    printf("diagnoal lines\n");
+    ssd1306_quickLine(0, 18, 20, 29, BLACK);
+    ssd1306_drawLine (5, 18, 25, 29, BLACK);
+
+
+//    ssd1306_drawPixel(35, 29, BLACK);
+
+// diagonal lines
+
+    for (int i = 32; i < 100; i += 5) {
+        ssd1306_drawLine(32, 18, i, 29, WHITE);
+        ssd1306_display();
+    }
+    
 
 
     // ssd1306_dim(1);
     ssd1306_display();
 
 
-    while (true) {
+    while (false) {
         delay(1000);
         fflush(stdout);
     }

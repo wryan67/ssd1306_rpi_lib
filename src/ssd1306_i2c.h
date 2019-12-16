@@ -168,7 +168,10 @@ void ssd1306_drawString(char *str);
 void ssd1306_drawChar(int x, int y, unsigned char c, int color, int size);
 
 void ssd1306_moveCursor(int x, int y);
-
+void ssd1306_drawCircle(int x, int y, int radius, int color);
+void ssd1306_quickLine(int x1, int y1, int x2, int y2, int color);
+void ssd1306_drawLine(int x1, int y1, int x2, int y2, int color);
+void ssd1306_arcPoint(int x, int y, int radius, double degree, int* xPoint, int* yPoint);
 
 #ifdef __cplusplus
 }  // extern "C"

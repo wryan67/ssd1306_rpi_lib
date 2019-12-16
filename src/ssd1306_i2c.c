@@ -26,6 +26,7 @@ All text above, and the splash screen below must be included in any redistributi
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "ssd1306_i2c.h"
 
@@ -807,4 +808,84 @@ void ssd1306_drawChar(int x, int y, unsigned char c, int color, int size)
 			line >>= 1;
 		}
 	}
+}
+
+static const double PI = 3.14159265358979;
+
+
+void ssd1306_arcPoint(int x, int y, int radius, double degree, int *xPoint, int *yPoint) {
+    double px = radius * cos(degree * PI / 180.0);
+    double py = radius * sin(degree * PI / 180.0);
+
+    int ix = x + round(px);
+    int iy = y + round(py);
+
+    *xPoint = ix;
+    *yPoint = iy;
+}
+
+
+
+
+
+void ssd1306_drawCircle(int x, int y, int radius, int color) {
+    double xPoint, yPoint, degree;
+
+    for (int degree = 0; degree < 360; degree += 1) {
+        xPoint = radius * cos(degree * PI / 180.0);
+        yPoint = radius * sin(degree * PI / 180.0);
+
+        ssd1306_drawPixel(x + xPoint, y + yPoint, color);
+    }
+}
+
+void ssd1306_quickLine(int x1, int y1, int x2, int y2, int color) {
+        int dx = x2 - x1;
+        int dy = y2 - y1;
+        for (int x=x1; x<=x2; ++x) {
+            int y = y1 + dy * (x - x1) / dx;
+            ssd1306_drawPixel(x, y, color);
+        }
+}
+
+#define swap(x,y) do \ 
+{ \
+    unsigned char swap_temp[sizeof(x) == sizeof(y) ? (signed)sizeof(x) : -1]; \
+        memcpy(swap_temp, &y, sizeof(x)); \
+        memcpy(&y, &x, sizeof(x)); \
+        memcpy(&x, swap_temp, sizeof(x)); \
+} while (0)
+
+void ssd1306_drawLine(int x1, int y1, int x2, int y2, int color) {
+    float x, y, dx, dy;
+    int i,step, rx, ry;
+
+    dx = x2 - x1;
+    dy = y2 - y1;
+
+    if (abs(dx) >= abs(dy))
+        step = abs(dx);
+    else
+        step = abs(dy);
+
+    dx = dx / step;
+    dy = dy / step;
+    rx = x1;
+    ry = y1;
+    x = x1;
+    y = y1;
+
+    for (i = 0; i<=step; ++i) {
+        ssd1306_drawPixel(rx, ry, color);
+
+        if (abs(x2 - rx) == 0 && abs(y2 - ry) == 0) {
+            break;
+        }
+
+        x+=dx;
+        y+=dy;
+
+        rx = round(x);
+        ry = round(y);
+    }
 }

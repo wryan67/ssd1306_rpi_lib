@@ -6,7 +6,7 @@ demo: objects
 
 
 objects:  src/ssd1306_i2c.c src/ssd1306_i2c.h src/oled_fonts.h
-	gcc -c src/ssd1306_i2c.c -o obj/ssd1306_i2c.o
+	gcc -c src/ssd1306_i2c.c -o obj/ssd1306_i2c.o -lm
 
 
 clean:
