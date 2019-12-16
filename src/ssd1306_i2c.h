@@ -167,6 +167,9 @@ void ssd1306_setTextSize(int s);
 void ssd1306_drawString(char *str);
 void ssd1306_drawChar(int x, int y, unsigned char c, int color, int size);
 
+void ssd1306_moveCursor(int x, int y);
+
+
 #ifdef __cplusplus
 }  // extern "C"
 #endif

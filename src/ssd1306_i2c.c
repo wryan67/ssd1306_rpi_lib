@@ -772,6 +772,11 @@ void ssd1306_drawString(char *str)
 		ssd1306_write(str[i]);
 }
 
+void ssd1306_moveCursor(int x, int y) {
+    cursor_x = x;
+    cursor_y = y;       
+}
+
 // Draw a character
 void ssd1306_drawChar(int x, int y, unsigned char c, int color, int size)
 {

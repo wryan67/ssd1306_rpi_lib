@@ -55,7 +55,12 @@ int main() {
         ssd1306_drawPixel(127, i, WHITE);
     }
 
-    ssd1306_fillRect(2, 2, 8, 13, WHITE);
+    ssd1306_fillRect(85, 2, 8, 13, WHITE);
+
+    ssd1306_moveCursor(2, 5);
+
+    ssd1306_drawString("Hello World!!!");
+
 
 
     // ssd1306_dim(1);
