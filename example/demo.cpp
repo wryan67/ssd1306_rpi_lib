@@ -63,6 +63,9 @@ int main() {
 
     ssd1306_fillRect(85, 2, 8, 13, WHITE);
 
+    ssd1306_display();
+
+
     ssd1306_drawCircle(110, 16, 15, WHITE);
 
 // clock
@@ -96,13 +99,12 @@ int main() {
 
     for (int i = 32; i < 100; i += 5) {
         ssd1306_drawLine(32, 18, i, 29, WHITE);
-        ssd1306_display();
     }
     
+    ssd1306_display();
 
 
     // ssd1306_dim(1);
-    ssd1306_display();
 
 
     while (false) {

@@ -221,6 +221,47 @@ void ssd1306_drawPixel(int x, int y, unsigned int color)
 	}
 }
 
+void ssd1306_drawPixelImmediate(int x, int y, unsigned int color) {
+    if ((x < 0) || (x >= WIDTH) || (y < 0) || (y >= HEIGHT))
+        return;
+
+    // check rotation, move pixel around if necessary
+    switch (rotation) {
+    case 1:
+        ssd1306_swap(x, y);
+        x = WIDTH - x - 1;
+        break;
+    case 2:
+        x = WIDTH - x - 1;
+        y = HEIGHT - y - 1;
+        break;
+    case 3:
+        ssd1306_swap(x, y);
+        y = HEIGHT - y - 1;
+        break;
+    }
+
+    int bPosition=x + (y / 8) * SSD1306_LCDWIDTH;
+    // x is which column
+    switch (color) {
+    case WHITE:
+        buffer[bPosition] |= (1 << (y & 7));
+        break;
+    case BLACK:
+        buffer[bPosition] &= ~(1 << (y & 7));
+        break;
+    case INVERSE:
+        buffer[bPosition] ^= (1 << (y & 7));
+        break;
+    }
+
+    wiringPiI2CWriteReg8(i2cd, 0x40, buffer[bPosition]);
+
+
+}
+
+
+
 // Init SSD1306
 void ssd1306_begin(unsigned int vccstate, unsigned int i2caddr)
 {
