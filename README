@@ -1,16 +1,12 @@
-SSD1306 i2c driver for Raspberry PI
------------------------------------
+SSD1306 i2c driver for Raspberry PI, with circle and line drawing capablities
+-----------------------------------------------------------------------------
 
-Based on Adafruit SSD1306 Arduino library. Some functions came from Adafruit GF$
+Based on Adafruit SSD1306 Arduino library. 
 
-Tested on Raspberry Pi 2 with 0.96 Yellow/Blue OLED
+Requires WiringPi http://wiringpi.com/. 
 
-Required WiringPi http://wiringpi.com/ and WiringPi i2c lib. 
+Use make in the base folder to create the demo.
 
-How to run demo:
-gcc demo.c ssd1306_i2c.c -lwiringPi -o demo
-
-./demo
-
-
+    $ make 
+    $ ./demo
 
