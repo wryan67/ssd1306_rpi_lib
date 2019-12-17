@@ -6,6 +6,7 @@ demo: objects
 
 
 objects:  src/ssd1306_i2c.c src/ssd1306_i2c.h src/oled_fonts.h
+	@mkdir -p obj
 	gcc -c src/ssd1306_i2c.c -o obj/ssd1306_i2c.o -lm
 
 
