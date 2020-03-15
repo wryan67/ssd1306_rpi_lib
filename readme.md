@@ -5,7 +5,7 @@ Based on Adafruit SSD1306 Arduino library, with major credits to [Ilia Penev](ht
 
 Click the image to see the video demo:   
 
-[https://github.com/wryan67/ssd1306_rpi_lib/blob/master/readme/sample.jpg?raw=true](https://youtu.be/jewlkerc0p4)
+[<img src="https://github.com/wryan67/ssd1306_rpi_lib/blob/master/readme/sample.jpg?raw=true">](https://youtu.be/jewlkerc0p4)
 
 
 
